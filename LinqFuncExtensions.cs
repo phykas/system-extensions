@@ -32,18 +32,37 @@ namespace System.Extensions
         }
 
         /// <summary>
-        /// Exectute function if condition function is true
+        /// Execute function if condition function is true
         /// </summary>
         /// <typeparam name="TInput"></typeparam>
         /// <param name="o"></param>
         /// <param name="condition"></param>
         /// <param name="doAction"></param>
         /// <returns></returns>
-        public static bool ExecuteIf<TInput>(this TInput o, Func<TInput, bool> condition,
+        public static bool IfConditionTrueExecute<TInput>(this TInput o, Func<TInput, bool> condition,
            Action<TInput> doAction)
         {
             bool conditionResult = condition(o);
             if (conditionResult)
+            {
+                doAction(o);
+            }
+            return conditionResult;
+        }
+
+        /// <summary>
+        /// Execute function if condition function is false
+        /// </summary>
+        /// <typeparam name="TInput"></typeparam>
+        /// <param name="o"></param>
+        /// <param name="condition"></param>
+        /// <param name="doAction"></param>
+        /// <returns></returns>
+        public static bool IfConditionFalseExecute<TInput>(this TInput o, Func<TInput, bool> condition,
+           Action<TInput> doAction)
+        {
+            bool conditionResult = condition(o);
+            if (!conditionResult)
             {
                 doAction(o);
             }
